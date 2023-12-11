@@ -1,17 +1,20 @@
 <script setup lang="ts">
-  import Dialog from './components/dialog.vue';
-  import Button from './components/button.vue';
+  import cookieDialog from './components/cookie-dialog.vue';
+  import cookieButton from './components/cookie-button.vue';
+  function teste () {
+    console.log('funcionoyyy')
+  }
 </script>
 
 <template>
-  <Dialog>
+  <cookieDialog dialog-name="mainDialog" dialog-class-name="testeeee">
     <h1>TESTANDO</h1>
-    <Button content="TESTANDO"></Button>
-  </Dialog>
+    <cookieButton ref-dialog-name="mainDialog" :action="teste" close>Ok</cookieButton>
+  </cookieDialog>
 </template>
 
 <style>
-body {
-  background-color: #111;
-}
+  body {
+    background-color: #333;
+  }
 </style>
