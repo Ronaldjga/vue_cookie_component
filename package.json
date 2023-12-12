@@ -1,11 +1,22 @@
 {
-  "name": "cookies_component",
-  "private": true,
-  "version": "0.0.0",
+  "name": "vue-cookie-component",
+  "version": "1.0.0",
   "type": "module",
+  "files": ["dist"],
+  "main": "./dist/vue-cookie-component.umd.cjs",
+  "module": "./dist/vue-cookie-component.js",
+  "exports": {
+    ".": {
+      "import": "./dist/vue-cookie-component.js",
+      "require": "./dist/vue-cookie-component.umd.cjs"
+    },
+    "./style.css": "./dist/style.css"
+  },
+  "types": "./dist/index.d.ts",
   "scripts": {
     "dev": "vite",
-    "build": "vue-tsc && vite build",
+    "build": "vite build && vue-tsc --emitDeclarationOnly",
+    "types": "vue-tsc ",
     "preview": "vite preview"
   },
   "dependencies": {
