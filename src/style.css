@@ -1,3 +1,7 @@
 dialog, button{
   box-sizing: border-box;
 }
+
+body {
+  background-color: #333 !important;
+}
