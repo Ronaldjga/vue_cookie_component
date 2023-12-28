@@ -4,31 +4,27 @@
     </div>
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue';
+<script setup lang="ts">
+import { PropType, computed } from 'vue';
+import type { IVariants } from "../types/variants"
 
-type IVariants = "main" | "custom";
-
-export default defineComponent({
-    name: "Cookie-Actions",
-    props: {
-        class: {
-            type: String,
-            default: ""
-        },
-        variants: {
-            type: String as () => IVariants,
-            default: "custom"
-        }
+const props = defineProps({
+    class: {
+        type: String,
+        default: ''
     },
-    computed: {
-        className() {
-            if(this.variants === 'main') {
-                return `d-flex gap-2 flex-wrap flex-lg-nowrap justify-content-center align-items-center ${this.class}`
-            } else {
-                return this.class
-            }
-        }
+    variants: {
+        type: String as PropType<IVariants>,
+        default: "custom"
+    }
+})
+
+const className = computed(() => {
+    console.log('ta fuonando aqui')
+    if(props.variants === 'main') {
+        return `d-flex gap-2 flex-wrap flex-lg-nowrap justify-content-center align-items-center ${props.class}`
+    } else {
+        return props.class
     }
 })
 </script>

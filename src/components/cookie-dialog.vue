@@ -6,61 +6,67 @@
   </dialog>
 </template>
 
-<script lang="ts">
-import { defineComponent } from "vue";
+<script setup lang="ts">
+import { PropType, ref, computed, onMounted } from "vue";
+import type { IVariants } from "../types/variants";
 
-type IVariants = "main" | "custom";
+let dialogElement = ref<HTMLDialogElement | null>(null)
 
-export default defineComponent({
-  name: "Cookie-Dialog",
-  data() {
-    return {
-      dialogElement: null as HTMLDialogElement | null,
-    };
+const props = defineProps({
+  dialogName: {
+    type: String,
+    required: true
   },
-  props: {
-    dialogName: { type: String, required: true },
-    isOpen: Boolean,
-    class: { type: String, default: "" },
-    contentClass: { type: String, default: "" },
-    disableEscClose: { type: Boolean, default: false },
-    variants: {
-      type: String as () => IVariants,
-      default: "Custom",
-    },
+  isOpen: {
+    type: Boolean
   },
-  computed: {
-    className() {
-      if (this.variants === "main") {
-        return `container position-fixed mb-1 border-0 rounded-1 bg-primary p-0 ${this.class}`;
-      } else {
-        return this.class;
-      }
-    },
-    contentClassName() {
-      if (this.variants === "main") {
-        return `p-3 d-lg-flex bg-primary justify-content-lg-between flex-wrap flex-lg-nowrap ${this.contentClass}`;
-      } else {
-        return this.contentClass;
-      }
-    },
+  class: {
+    type: String,
+    default: ''
   },
-  mounted() {
-    const dialog = document.getElementById(this.dialogName) as HTMLDialogElement;
-    this.dialogElement = dialog;
-    if (this.isOpen === true) {
-      dialog.showModal();
-    }
+  contentClass: {
+    type: String,
+    default: ''
   },
-  methods: {
-    escClose(event: KeyboardEvent) {
-      if (this.disableEscClose === true && event.code === "Escape") {
-        console.log(event);
-        event.preventDefault();
-      }
-    },
+  disableEscClose: {
+    type: Boolean,
+    default: false
   },
-});
+  variants: {
+    type: String as PropType<IVariants>,
+    default: "custom"
+  }
+})
+
+const className = computed(() => {
+  if (props.variants === "main") {
+      return `container position-fixed mb-1 border-0 rounded-1 bg-primary p-0 ${props.class}`;
+    } else {
+    return props.class;
+  }
+})
+
+const contentClassName = computed(() => {
+  if (props.variants === "main") {
+    return `p-3 d-lg-flex bg-primary justify-content-lg-between flex-wrap flex-lg-nowrap ${props.contentClass}`;
+  } else {
+    return props.contentClass;
+  }
+})
+
+const escClose = (event: KeyboardEvent) => {
+  if(props.disableEscClose === true && event.code === "Escape") {
+    event.preventDefault();
+  }
+}
+
+onMounted(() => {
+  const dialog = document.getElementById(props.dialogName) as HTMLDialogElement | null;
+  dialogElement.value = dialog;
+  if (props.isOpen === true && dialogElement.value != null) {
+    dialogElement.value.showModal();
+  }
+})
 </script>
 
 <style></style>

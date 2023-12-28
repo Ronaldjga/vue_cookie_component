@@ -12,7 +12,7 @@ export default defineConfig({
       fileName: "vue-cookie-component",
     },
     rollupOptions: {
-      external: ["vue"],
+      external: ["vue", 'bootstrap'],
       output: {
         globals: {
           vue: "Vue",
