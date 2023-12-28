@@ -1,6 +1,8 @@
 <template>
   <dialog :id="dialogName" :class="className" @keydown="escClose">
-    <slot></slot>
+    <div :class="contentClassName">
+      <slot></slot>
+    </div>
   </dialog>
 </template>
 
@@ -19,7 +21,8 @@ export default defineComponent({
   props: {
     dialogName: { type: String, required: true },
     isOpen: Boolean,
-    dialogClassName: String,
+    class: { type: String, default: "" },
+    contentClass: { type: String, default: "" },
     disableEscClose: { type: Boolean, default: false },
     variants: {
       type: String as () => IVariants,
@@ -29,9 +32,16 @@ export default defineComponent({
   computed: {
     className() {
       if (this.variants === "main") {
-        return `${this.dialogClassName} container position-fixed mb-1 bg-primary border-0 rounded-1`;
+        return `container position-fixed mb-1 border-0 rounded-1 bg-primary p-0 ${this.class}`;
       } else {
-        return this.dialogClassName;
+        return this.class;
+      }
+    },
+    contentClassName() {
+      if (this.variants === "main") {
+        return `p-3 d-lg-flex bg-primary justify-content-lg-between flex-wrap flex-lg-nowrap ${this.contentClass}`;
+      } else {
+        return this.contentClass;
       }
     },
   },

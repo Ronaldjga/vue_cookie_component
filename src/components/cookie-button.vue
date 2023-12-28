@@ -1,10 +1,9 @@
 <template>
   <button
-    class="rounded-1 border-0 px-3 py-1 text-center d-block"
-    style="width: fit-content"
+    :class="className"
+    style="width: fit-content; text-wrap: nowrap"
     @click="checkAction()"
   >
-    <template v-if="!$slots.default">{{ content }}</template>
     <slot></slot>
   </button>
 </template>
@@ -12,13 +11,22 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 
+type IVariants = "main" | "custom";
+
 export default defineComponent({
   name: "Cookie-Button",
   props: {
-    content: String,
     refDialogName: {
       type: String,
       require: true,
+    },
+    class: {
+      type: String,
+      default: ""
+    },
+    variants: {
+      type: String as () => IVariants,
+      default: "custom"
     },
     close: {
       type: Boolean,
@@ -28,6 +36,15 @@ export default defineComponent({
       type: Boolean,
       default: false,
     },
+  },
+  computed: {
+    className() {
+      if(this.variants === 'main') {
+        return `rounded-1 border-0 px-3 py-1 text-center d-block ${this.class}`
+      } else {
+        return this.class
+      }
+    } 
   },
   methods: {
     closeAction() {
@@ -48,10 +65,8 @@ export default defineComponent({
     },
     async checkAction() {
       if (this.close && !this.open) {
-        console.log("erro 4");
         this.closeAction();
       } else if (this.open && !this.close) {
-        console.log("erro 5");
         this.openAction();
       }
     },
