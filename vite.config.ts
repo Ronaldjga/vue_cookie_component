@@ -1,8 +1,7 @@
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
-import { format, resolve } from 'path'
-import typescript from "@rollup/plugin-typescript"
-import dts from "rollup-plugin-dts"
+import { resolve } from 'path'
+
 
 // https://vitejs.dev/config/
 export default defineConfig({
