@@ -26,7 +26,7 @@
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true
   },
-  "include": ["src/**/*.ts", "src/**/*.tsx", "src/**/*.vue", "typings/vue-cookie-component.d.ts"],
+  "include": ["src/**/*.ts", "src/**/*.tsx", "src/**/*.vue", "typings/index.d.ts"],
   "exclude": ["src/App.vue", "src/main.ts", "src/pattern/dialogPattern.vue", "node_modules", "typings"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }
