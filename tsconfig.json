@@ -27,6 +27,6 @@
     "noFallthroughCasesInSwitch": true
   },
   "include": ["src/**/*.ts", "src/**/*.tsx", "src/**/*.vue"],
-  "exclude": ["src/App.vue", "src/main.ts", "src/pattern/dialogPattern.vue"],
+  "exclude": ["src/App.vue", "src/main.ts", "src/pattern/dialogPattern.vue", "node_modules", "src/types"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }
