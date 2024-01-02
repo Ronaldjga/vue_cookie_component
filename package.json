@@ -10,8 +10,14 @@
   "typings": "./dist/index.d.ts",
   "exports": {
     ".": {
-      "import": "./dist/vue-cookie-component.js",
-      "require": "./dist/vue-cookie-component.umd.cjs"
+      "import": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/vue-cookie-component.js"
+      },
+      "require": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/vue-cookie-component.umd.cjs"
+      }
     },
     "./style.css": "./dist/style.css"
   },
