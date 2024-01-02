@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "typeRoots": ["node_modules/@types", "src/types"],
+    "typeRoots": ["node_modules/@types", "typings"],
     "target": "ES2020",
     "useDefineForClassFields": true,
     "module": "ESNext",
@@ -26,7 +26,7 @@
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true
   },
-  "include": ["src/**/*.ts", "src/**/*.tsx", "src/**/*.vue"],
-  "exclude": ["src/App.vue", "src/main.ts", "src/pattern/dialogPattern.vue", "node_modules", "src/types"],
+  "include": ["src/**/*.ts", "src/**/*.tsx", "src/**/*.vue", "typings/vue-cookie-component.d.ts"],
+  "exclude": ["src/App.vue", "src/main.ts", "src/pattern/dialogPattern.vue", "node_modules", "typings"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

@@ -16,16 +16,7 @@ export default defineConfig({
     },
     rollupOptions: {
       external: ["vue", 'bootstrap'],
-      plugins: [
-        {
-          ...typescript({ tsconfig: './tsconfig.json' }),
-          apply: 'build',
-          declaration: true,
-          declarationDir: 'types/',
-          rootDir: '/',
-          allowImportingTsExtensions: true,
-        }
-      ],
+      plugins: [],
       output: {
         globals: {
           vue: "Vue",
