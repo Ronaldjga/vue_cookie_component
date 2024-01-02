@@ -6,17 +6,8 @@ import dts from "rollup-plugin-dts"
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [{
-    ...typescript({tsconfig: "./tsconfig.json"}),
-    apply: "build",
-    declaration: true,
-    declarationDir: "types/",
-    rootDir: "/"
-  },
-  dts({ // Adicione o plugin aqui
-    input: ['/src/types/*.ts'],
-    output: [{file: 'dist/index.d.ts', format: "es"}],
-  }),vue()],
+  plugins: [
+    vue()],
   build: {
     lib: {
       entry: resolve(__dirname, "src/index.ts"),
@@ -25,6 +16,16 @@ export default defineConfig({
     },
     rollupOptions: {
       external: ["vue", 'bootstrap'],
+      plugins: [
+        {
+          ...typescript({ tsconfig: './tsconfig.json' }),
+          apply: 'build',
+          declaration: true,
+          declarationDir: 'types/',
+          rootDir: '/',
+          allowImportingTsExtensions: true,
+        }
+      ],
       output: {
         globals: {
           vue: "Vue",

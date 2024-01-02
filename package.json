@@ -7,6 +7,7 @@
   ],
   "main": "./dist/vue-cookie-component.umd.cjs",
   "module": "./dist/vue-cookie-component.js",
+  "typings": "./dist/index.d.ts",
   "exports": {
     ".": {
       "import": "./dist/vue-cookie-component.js",
@@ -17,7 +18,7 @@
   "types": "./dist/index.d.ts",
   "scripts": {
     "dev": "vite",
-    "build": "vite build && vue-tsc --emitDeclarationOnly",
+    "build": "vite build && vue-tsc",
     "types": "vue-tsc ",
     "preview": "vite preview"
   },
