@@ -4,7 +4,12 @@
 
 <template>
     <dialogPattern></dialogPattern>
+    <div class="divTeste"></div>
 </template>
 
-<style>
+<style scoped>
+.divTeste {
+  width: 10px;
+  height: 300vh;
+}
 </style>

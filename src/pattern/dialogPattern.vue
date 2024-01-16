@@ -1,10 +1,25 @@
 <template>
+  <cookieButton
+        ref-dialog-name="mainDialog"
+        variants="main"
+        @click="() => {
+          changeIsOpen()
+          console.log(isOpen)
+        }"
+      >
+    abrir modal 1
+    </cookieButton>
+
   <!-- <cookieButton ref-dialog-name="mainDialog" :action="teste" open>Ok</cookieButton> -->
   <cookieDialog
     dialog-name="mainDialog"
     :isOpen="isOpen"
-    :disable-esc-close="true"
-    variants="main"
+    :esc-close="false"
+    :seamless="true"
+    @esc-close-press="(b) => {
+      console.log(b, 'aquiii')
+      changeIsOpen()
+    }"
   >
     <p class="text-light">
       Para melhorar a sua experiência no portal e prover serviços personalizados,
@@ -18,67 +33,45 @@
         ref-dialog-name="mainDialog"
         class="bg-danger text-light"
         variants="main"
-        @click="setCookies('true')"
         >Aceitar</cookieButton
       >
       <cookieButton
         ref-dialog-name="mainDialog"
         variants="main"
-        @click="setCookies('false')"
+        @click="changeIsOpen()"
         >Recusar</cookieButton
       >
       <cookieButton
         ref-dialog-name="secondDialog"
         variants="main"
-        @click="() => (isOpen2 = !isOpen2)"
-        open
+        @click="changeIsOpen2()"
       >
         Gerenciar Cookies
       </cookieButton>
     </cookieActions>
   </cookieDialog>
 
-  <cookieDialog dialog-name="secondDialog" :isOpen="isOpen2" :disable-esc-close="false">
+  <cookieDialog dialog-name="secondDialog" :isOpen="isOpen2" :esc-close="true">
     <h2>testando dialog dentro dialog</h2>
-    <cookieButton ref-dialog-name="secondDialog" @click="setCookies('true')" close>Aceitar</cookieButton>
-    <cookieButton ref-dialog-name="secondDialog" @click="setCookies('false')" close>Recusar</cookieButton>
+    <cookieButton ref-dialog-name="secondDialog" close>Aceitar</cookieButton>
+    <cookieButton ref-dialog-name="secondDialog" @click="changeIsOpen2()">Recusar</cookieButton>
   </cookieDialog>
 </template>
 
-<script>
+<script setup lang="ts">
 import cookieDialog from "../components/cookie-dialog.vue";
 import cookieButton from "../components/cookie-button.vue";
 import cookieActions from "../components/cookie-actions.vue";
-import { defineComponent } from "vue";
+import { ref } from "vue";
 
-export default defineComponent({
-  data() {
-    return {
-      isOpen: Boolean,
-      isOpen2: false,
-    };
-  },
-  components: {
-    cookieDialog,
-    cookieButton,
-    cookieActions
-  },
-  methods: {
-    setCookies(value) {
-      this.$cookies.set("lgpd_cookies", value, 365);
-    },
-    verifyCookies() {
-      const cookieStats = this.$cookies.get("lgpd_cookies");
-      if (cookieStats) {
-        this.isOpen = false;
-      } else {
-        this.isOpen = true;
-      }
-      console.log(cookieStats);
-    },
-  },
-  created() {
-    this.verifyCookies();
-  },
-});
+let isOpen = ref(false);
+let isOpen2 = ref(false)
+
+const changeIsOpen = () => {
+  isOpen.value = !isOpen.value
+}
+
+const changeIsOpen2 = () => {
+  isOpen2.value = !isOpen2.value
+}
 </script>
