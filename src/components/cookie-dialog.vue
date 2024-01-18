@@ -1,5 +1,5 @@
 <template>
-  <dialog v-show="isOpen" :id="dialogName" :seamless="seamless" @keydown="escClose" :esc-close="escClose">
+  <dialog v-show="isOpen" :id="dialogName" :seamless="seamless" @keydown="escClose" :esc-close="escClose" @focus="() => console.log('foquei')">
     <slot></slot>
   </dialog>
 </template>
@@ -41,6 +41,7 @@ const handlerModal = () => {
     if(props.isOpen === true) {
       dialogElement.value.showModal();
       dialogElement.value.className = 'p-dialog' + ' ' + props.class;
+      
     } else if(props.isOpen === false){
       dialogElement.value?.close()
       document.getElementsByTagName('body')[0].style.overflowY = 'auto';
@@ -57,34 +58,32 @@ const handlerModal = () => {
 }
 
 watch(() => props.isOpen, () => {
+  console.log('exueiujafn')
   handlerModal()
-  dialogElement.value?.focus()
+  // if(props.isOpen === true) {
+  //   document.addEventListener('keydown', (e): void => {
+  //     if(e.code === "Escape") {
+  //       e.preventDefault()
+  //     }
+  //   })
+  // }
 })
 
-
 const escClose = (event: KeyboardEvent) => {
-  if(props.isOpen === true && props.escClose === true) {
-    if(event.code === "Escape") {
-      console.log("aqui 1")
-      event.preventDefault()
-    }
-  }
+  // if(props.isOpen === true && props.escClose === true) {
+  //     event.preventDefault()
+  // }
 
-  if(props.isOpen === true && props.escClose === false) {
-    console.log("aqui 2")
-    emits('esc-close-press', dialogElement.value?.open)
-  }
+  // if(props.isOpen === true && props.escClose === false && event.code === "Escape") {
+  //   emits('esc-close-press', dialogElement.value?.open)
+  // }
+
 };
 
 onMounted(() => {
-  const dialog = document.getElementById(props.dialogName) as HTMLDialogElement | null;
-  dialogElement.value = dialog;
-  handlerModal()
-  document.addEventListener('keydown', (e): void => {
-    if(e.code === "Escape") {
-      e.preventDefault()
-    }
-  })
+  // const dialog = document.getElementById(props.dialogName) as HTMLDialogElement | null;
+  // dialogElement.value = dialog;
+  // handlerModal()
 })
 </script>
 
